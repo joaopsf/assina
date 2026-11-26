@@ -1,3 +1,13 @@
+<script setup lang="ts">
+import { ref, watch } from 'vue'
+import GuiaRapido from './components/GuiaRapido.vue'
+
+// O guia aparece na primeira visita; depois de fechado, só volta pelo botão "Como testar".
+const CHAVE_GUIA = 'assina:guia-fechado'
+const guiaAberto = ref(localStorage.getItem(CHAVE_GUIA) !== '1')
+watch(guiaAberto, (aberto) => localStorage.setItem(CHAVE_GUIA, aberto ? '0' : '1'))
+</script>
+
 <template>
   <header class="topo">
     <RouterLink to="/" class="marca">
@@ -14,7 +24,39 @@
       </svg>
       Assina
     </RouterLink>
-    <a class="autor" href="https://joaopaulo.omniahub.com.br" target="_blank" rel="noopener">projeto de João Paulo ↗</a>
+    <div class="topo-direita">
+      <button v-if="!guiaAberto" class="como-testar" @click="guiaAberto = true">Como testar</button>
+      <a class="autor" href="https://joaopaulo.omniahub.com.br" target="_blank" rel="noopener">projeto de João Paulo ↗</a>
+    </div>
   </header>
+  <GuiaRapido v-if="guiaAberto" @fechar="guiaAberto = false" />
   <RouterView />
 </template>
+
+<style scoped>
+.topo-direita {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+.como-testar {
+  border: 1px solid var(--borda-forte);
+  background: #fff;
+  color: var(--texto);
+  font: inherit;
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.75rem;
+  border-radius: 999px;
+  cursor: pointer;
+}
+.como-testar:hover {
+  border-color: var(--primaria);
+  color: var(--primaria);
+}
+@media (max-width: 520px) {
+  .autor {
+    display: none;
+  }
+}
+</style>
