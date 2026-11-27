@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IconeTraco from '../components/IconeTraco.vue'
 import { computed, ref, toRef } from 'vue'
 import { useQuery } from '@urql/vue'
 import { BUSCAR } from '../graphql/operacoes'
@@ -36,7 +37,7 @@ const eventosRecentes = computed(() => [...(doc.value?.eventos ?? [])].reverse()
 
 <template>
   <main v-if="doc" class="conteudo">
-    <RouterLink to="/" class="voltar">← Documentos</RouterLink>
+    <RouterLink to="/" class="voltar"><IconeTraco nome="voltar" />Documentos</RouterLink>
     <header class="cabecalho">
       <div>
         <h1>{{ doc.nome }}</h1>
@@ -46,7 +47,7 @@ const eventosRecentes = computed(() => [...(doc.value?.eventos ?? [])].reverse()
         </p>
       </div>
       <button class="botao" :disabled="doc.status !== 'CONCLUIDO' || baixando" @click="baixar">
-        {{ baixando ? 'Gerando…' : 'Baixar PDF assinado' }}
+        <IconeTraco nome="baixar" />{{ baixando ? 'Gerando…' : 'Baixar PDF assinado' }}
       </button>
     </header>
 
@@ -71,7 +72,7 @@ const eventosRecentes = computed(() => [...(doc.value?.eventos ?? [])].reverse()
               v-else-if="s.podeAssinar"
               class="botao pequeno"
               :to="{ name: 'assinar', params: { id: doc.id, signatarioId: s.id } }"
-              >Abrir link</RouterLink
+              ><IconeTraco nome="link" />Abrir link</RouterLink
             >
           </li>
         </ol>
@@ -99,6 +100,9 @@ const eventosRecentes = computed(() => [...(doc.value?.eventos ?? [])].reverse()
 
 <style scoped>
 .voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
   font-size: 0.85rem;
   color: var(--texto-2);
   text-decoration: none;

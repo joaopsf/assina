@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IconeTraco from '../components/IconeTraco.vue'
 import { ref } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMutation, useQuery } from '@urql/vue'
@@ -106,8 +107,8 @@ const destino = (doc: DocumentoGQL) =>
       <p v-if="enviando"><strong>Lendo o PDF…</strong></p>
       <p v-else><strong>Arraste um PDF aqui</strong> ou</p>
       <div class="acoes" v-if="!enviando">
-        <button class="botao" @click="entrada?.click()">Escolher arquivo</button>
-        <button class="botao secundario" @click="usarExemplo">Usar contrato de exemplo</button>
+        <button class="botao" @click="entrada?.click()"><IconeTraco nome="arquivo" />Escolher arquivo</button>
+        <button class="botao secundario" @click="usarExemplo"><IconeTraco nome="exemplo" />Usar contrato de exemplo</button>
       </div>
       <input ref="entrada" type="file" accept="application/pdf" hidden @change="escolher(($event.target as HTMLInputElement).files)" />
       <p v-if="erro" class="erro" role="alert">{{ erro }}</p>

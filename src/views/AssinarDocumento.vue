@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IconeTraco from '../components/IconeTraco.vue'
 // O que a pessoa vê ao abrir o link do e-mail: o documento, os campos dela e o quadro de assinatura.
 import { computed, ref, toRef } from 'vue'
 import { useMutation, useQuery } from '@urql/vue'
@@ -57,9 +58,13 @@ function irParaCampo() {
           <span>Este documento tem ordem de assinatura. Falta {{ vez?.nome }} assinar antes.</span>
         </template>
       </div>
-      <button v-if="eu.podeAssinar" class="botao" @click="quadroAberto = true">Assinar agora</button>
-      <button v-else-if="eu.status !== 'ASSINOU'" class="botao secundario" @click="irParaCampo">Ver onde vou assinar</button>
-      <RouterLink v-else class="botao secundario" :to="{ name: 'acompanhar', params: { id } }">Ver andamento</RouterLink>
+      <button v-if="eu.podeAssinar" class="botao" @click="quadroAberto = true"><IconeTraco nome="assinar" />Assinar agora</button>
+      <button v-else-if="eu.status !== 'ASSINOU'" class="botao secundario" @click="irParaCampo">
+        <IconeTraco nome="local" />Ver onde vou assinar
+      </button>
+      <RouterLink v-else class="botao secundario" :to="{ name: 'acompanhar', params: { id } }"
+        ><IconeTraco nome="andamento" />Ver andamento</RouterLink
+      >
     </div>
     <p v-if="erro" class="erro conteudo" role="alert">{{ erro }}</p>
 

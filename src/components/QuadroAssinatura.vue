@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IconeTraco from './IconeTraco.vue'
 // Quadro pra desenhar a assinatura. Traço suave com curvas entre os pontos médios,
 // espessura que varia com a velocidade (como caneta), e PNG recortado no fim.
 import { onMounted, ref } from 'vue'
@@ -112,8 +113,10 @@ function recortar(): string {
         <span v-if="vazio" class="dica">assine aqui</span>
       </div>
       <footer>
-        <button class="botao secundario" :disabled="vazio" @click="limpar">Limpar</button>
-        <button class="botao" :disabled="vazio" @click="emit('confirmar', recortar())">Confirmar assinatura</button>
+        <button class="botao secundario" :disabled="vazio" @click="limpar"><IconeTraco nome="limpar" />Limpar</button>
+        <button class="botao" :disabled="vazio" @click="emit('confirmar', recortar())">
+          <IconeTraco nome="concluir" />Confirmar assinatura
+        </button>
       </footer>
     </div>
   </div>

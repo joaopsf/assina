@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { ref, watch } from 'vue'
 import GuiaRapido from './components/GuiaRapido.vue'
+import IconeTraco from './components/IconeTraco.vue'
 
 // O guia aparece na primeira visita; depois de fechado, só volta pelo botão "Como testar".
 const CHAVE_GUIA = 'assina:guia-fechado'
@@ -25,7 +26,7 @@ watch(guiaAberto, (aberto) => localStorage.setItem(CHAVE_GUIA, aberto ? '0' : '1
       Assina
     </RouterLink>
     <div class="topo-direita">
-      <button v-if="!guiaAberto" class="como-testar" @click="guiaAberto = true">Como testar</button>
+      <button v-if="!guiaAberto" class="como-testar" @click="guiaAberto = true"><IconeTraco nome="ajuda" />Como testar</button>
       <a class="autor" href="https://joaopaulo.omniahub.com.br" target="_blank" rel="noopener">projeto de João Paulo ↗</a>
     </div>
   </header>
@@ -40,6 +41,9 @@ watch(guiaAberto, (aberto) => localStorage.setItem(CHAVE_GUIA, aberto ? '0' : '1
   gap: 1rem;
 }
 .como-testar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.35rem;
   border: 1px solid var(--borda-forte);
   background: #fff;
   color: var(--texto);

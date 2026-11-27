@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IconeTraco from './IconeTraco.vue'
 // Caixa "Teste em 1 minuto": diz pra quem chega pelo link o que o app faz e o que testar.
 // Fecha e lembra no aparelho; o botão "Como testar" do topo abre de novo.
 defineEmits<{ fechar: [] }>()
@@ -23,7 +24,7 @@ defineEmits<{ fechar: [] }>()
       <b>Repare:</b> a segunda pessoa só consegue assinar depois da primeira, e o PDF final registra o SHA-256 do original, quem assinou e
       quando.
     </p>
-    <button class="botao" @click="$emit('fechar')">Entendi</button>
+    <button class="botao" @click="$emit('fechar')"><IconeTraco nome="concluir" />Entendi</button>
   </section>
 </template>
 

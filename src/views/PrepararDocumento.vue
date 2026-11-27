@@ -1,4 +1,5 @@
 <script setup lang="ts">
+import IconeTraco from '../components/IconeTraco.vue'
 import { computed, ref, toRef, watch } from 'vue'
 import { useRouter } from 'vue-router'
 import { useMutation, useQuery } from '@urql/vue'
@@ -128,7 +129,7 @@ function clicarNaPagina(pagina: number, x: number, y: number) {
     </section>
 
     <aside class="painel">
-      <RouterLink to="/" class="voltar">← Documentos</RouterLink>
+      <RouterLink to="/" class="voltar"><IconeTraco nome="voltar" />Documentos</RouterLink>
       <h1>{{ doc.nome }}</h1>
       <p class="sub">
         {{ doc.paginas }} {{ doc.paginas === 1 ? 'página' : 'páginas' }} · rascunho
@@ -153,7 +154,7 @@ function clicarNaPagina(pagina: number, x: number, y: number) {
       <form class="nova" @submit.prevent="adicionarPessoa">
         <input v-model="nome" placeholder="Nome" aria-label="Nome de quem assina" autocomplete="off" />
         <input v-model="email" placeholder="E-mail" type="email" aria-label="E-mail de quem assina" autocomplete="off" />
-        <button class="botao secundario" :disabled="!nome || !email">Adicionar pessoa</button>
+        <button class="botao secundario" :disabled="!nome || !email"><IconeTraco nome="pessoa" />Adicionar pessoa</button>
       </form>
 
       <div class="dica" v-if="doc.signatarios.length">
@@ -163,7 +164,9 @@ function clicarNaPagina(pagina: number, x: number, y: number) {
 
       <p v-if="erro" class="erro" role="alert">{{ erro }}</p>
 
-      <button class="botao enviar" :disabled="!doc.signatarios.length" @click="enviarDocumento">Enviar para assinatura</button>
+      <button class="botao enviar" :disabled="!doc.signatarios.length" @click="enviarDocumento">
+        <IconeTraco nome="enviar" />Enviar para assinatura
+      </button>
     </aside>
   </main>
   <main v-else-if="!consulta.fetching.value" class="conteudo">
@@ -202,6 +205,9 @@ function clicarNaPagina(pagina: number, x: number, y: number) {
   gap: 0.9rem;
 }
 .voltar {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
   font-size: 0.85rem;
   color: var(--texto-2);
   text-decoration: none;
