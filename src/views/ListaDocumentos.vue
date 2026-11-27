@@ -176,7 +176,7 @@ const destino = (doc: DocumentoGQL) =>
   align-items: center;
   gap: 0.75rem;
 }
-.envio svg {
+.envio svg:not(.ico) {
   color: var(--primaria);
 }
 .envio.arrastando {
